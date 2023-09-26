@@ -1,8 +1,11 @@
 @extends('layout.content')
 
-{{-- @push('css')
-  
-@endpush --}}
+@push('css')
+<link rel="stylesheet" href="{{ asset('template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}  ">
+<link rel="stylesheet"
+    href="{{ asset('template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}  ">
+<link rel="stylesheet" href="{{ asset('template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}  ">
+@endpush
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -39,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="dept" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Rendering engine</th>
@@ -78,51 +81,30 @@
     </div>
     <!-- /.content-wrapper -->
 @endsection
+
+
+@push('js')
+<script src="{{ asset('template/plugins/datatables/jquery.dataTables.min.js') }}  "></script>
+<script src="{{ asset('template/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}  "></script>
+<script src="{{ asset('template/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}  "></script>
+<script src="{{ asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}  "></script>
+<script src="{{ asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}  "></script>
+<script src="{{ asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}  "></script>
 <script>
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#ajax-crud-datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ url('employee') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'address',
-                    name: 'address'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false
-                },
-            ],
-            order: [
-                [0, 'desc']
-            ]
-        });
+    $(function () {
+      $("#dept").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
     });
-</script>
-
-{{-- @push('js')
-    
-@endpush --}}
+  </script>
+@endpush
