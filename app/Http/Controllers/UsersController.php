@@ -9,8 +9,9 @@ class UsersController extends Controller
     function index()
     {
         $data = [
-            'title' => 'Master Users'
+            'title' => 'Master Users',
+            'sub_title' => 'Users List'
         ];
-        return view('conten.user', $data);
+        return view('master.user', $data);
     }
 }

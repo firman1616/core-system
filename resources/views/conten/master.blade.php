@@ -33,7 +33,7 @@
                         <div class="icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <a href="/user" class="small-box-footer">
+                        <a href="/master/user" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -51,7 +51,7 @@
 
                             <i class="fas fa-sitemap"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="/master/dept" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
