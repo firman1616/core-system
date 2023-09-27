@@ -104,6 +104,10 @@
             <div class="modal-body">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group">
+                        <label for="name">Kode Dept</label>
+                        <input type="text" class="form-control" id="kodeDept" name="kodeDept" placeholder="Kode" required>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Name Dept</label>
                         <input type="text" class="form-control" id="namaDept" name="namaDept" placeholder="Name" required>
                     </div>
@@ -173,6 +177,7 @@
         $('#save-data').click(function (e) {
             e.preventDefault();
             $(this).html('Sending ...');
+            var table = $('#dept').DataTable();
 
             $.ajax({
                 data: $('#DeptForm').serialize(),
@@ -182,7 +187,10 @@
                 success: function (data) {
                     $('#DeptForm').trigger("reset");
                     $('#DeptModal').modal('hide');
-                    window.location.reload();
+                    table.ajax.reload( function ( json ) {
+                        $('#dept').val( json.lastInput );
+                    } );
+                    // window.location.reload();
                     // var oTable = $('#dept').dataTable();
                     // oTable.ajax.reload();
                 },

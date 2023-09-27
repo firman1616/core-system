@@ -35,6 +35,7 @@ class DeptController extends Controller
     public function store(Request $request)
     {
         Dept::create([
+            'kode_dept' => $request->kodeDept,
             'name' => $request->namaDept,
             'status' => $request->status
         ]);
