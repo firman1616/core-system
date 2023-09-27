@@ -8,6 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }}</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -34,10 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="
         https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
         " rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}  ">
-    <link rel="stylesheet"
-        href="{{ asset('template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}  ">
-    <link rel="stylesheet" href="{{ asset('template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}  ">
+        @stack('css')
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
