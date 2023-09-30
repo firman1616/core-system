@@ -48,7 +48,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name</th>
+                                            <th>Kode Dept</th>
+                                            <th>Nama Dept</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -57,6 +58,7 @@
                                         @foreach ($dept as $row)    
                                         <tr>
                                             <td>1</td>
+                                            <td>{{ $row->kode_dept }}</td>
                                             <td>{{ $row->name }}</td>
                                             <td>
                                                 @if ($row->status == '1')
@@ -104,6 +106,10 @@
             <div class="modal-body">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group">
+                        <label for="name">Kode Dept</label>
+                        <input type="text" class="form-control" id="kodeDept" name="kodeDept" placeholder="Kode" required>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Name Dept</label>
                         <input type="text" class="form-control" id="namaDept" name="namaDept" placeholder="Name" required>
                     </div>
@@ -135,7 +141,7 @@
 <script src="{{ asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}  "></script>
 <script src="{{ asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}  "></script>
 <script src="{{ asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}  "></script>
-<script>
+{{-- <script>
     $(function () {
       $("#dept").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false
@@ -151,16 +157,55 @@
         "responsive": true,
       });
     });
-  </script>
+  </script> --}}
 
   <script>
 
-    $(function () {
+    $(document).ready(function () {
+        var datatable = $('#dept').DataTable();
+        // $('#dept').DataTable({
+        //     processing: true,
+        //     serverside: true,
+        //     ajax: "{{ url('dept') }}",
+        //     columns: [{
+        //             data: 'DT_RowIndex',
+        //             name: 'DT_RowIndex',
+        //             orderable: false,
+        //             searchable: false
+        //         },
+        //         {
+        //             data: 'kode_dept',
+        //             name: 'Kode Dept'
+        //         }, {
+        //             data: 'name',
+        //             name: 'Nama Dept'
+        //         }, {
+        //             data: 'status',
+        //             name: 'Status'
+        //         }
+        //     ]
+        // })
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        // var table = $('#dept').DataTable({
+        //     processing: true,
+        //     serverSide: true,
+        //     url: "{{ url('dept') }}",
+        //     type: "GET",
+        //     columns: [
+        //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+        //         {data: 'kode_dept', name: 'kodeDept'},
+        //         {data: 'name', name: 'nameDept'},
+        //         {data: 'status', name: 'status'},
+        //         {data: 'action', name: 'action', orderable: false, searchable: false},
+        //     ]
+        // });
 
         $('.tambah-data').click(function () {
             $('#save-data').val("add-dept");
@@ -173,6 +218,7 @@
         $('#save-data').click(function (e) {
             e.preventDefault();
             $(this).html('Sending ...');
+            var table = $('#dept').DataTable();
 
             $.ajax({
                 data: $('#DeptForm').serialize(),
@@ -182,7 +228,8 @@
                 success: function (data) {
                     $('#DeptForm').trigger("reset");
                     $('#DeptModal').modal('hide');
-                    window.location.reload();
+                    datatable.ajax.reload();
+                    // window.location.reload();
                     // var oTable = $('#dept').dataTable();
                     // oTable.ajax.reload();
                 },
@@ -192,8 +239,6 @@
                 }
             });
         });
-
-
     });
   </script>
 @endpush
