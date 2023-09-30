@@ -48,7 +48,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name</th>
+                                            <th>Kode Dept</th>
+                                            <th>Nama Dept</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -57,6 +58,7 @@
                                         @foreach ($dept as $row)    
                                         <tr>
                                             <td>1</td>
+                                            <td>{{ $row->kode_dept }}</td>
                                             <td>{{ $row->name }}</td>
                                             <td>
                                                 @if ($row->status == '1')
@@ -139,7 +141,7 @@
 <script src="{{ asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}  "></script>
 <script src="{{ asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}  "></script>
 <script src="{{ asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}  "></script>
-<script>
+{{-- <script>
     $(function () {
       $("#dept").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false
@@ -155,16 +157,55 @@
         "responsive": true,
       });
     });
-  </script>
+  </script> --}}
 
   <script>
 
-    $(function () {
+    $(document).ready(function () {
+        var datatable = $('#dept').DataTable();
+        // $('#dept').DataTable({
+        //     processing: true,
+        //     serverside: true,
+        //     ajax: "{{ url('dept') }}",
+        //     columns: [{
+        //             data: 'DT_RowIndex',
+        //             name: 'DT_RowIndex',
+        //             orderable: false,
+        //             searchable: false
+        //         },
+        //         {
+        //             data: 'kode_dept',
+        //             name: 'Kode Dept'
+        //         }, {
+        //             data: 'name',
+        //             name: 'Nama Dept'
+        //         }, {
+        //             data: 'status',
+        //             name: 'Status'
+        //         }
+        //     ]
+        // })
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        // var table = $('#dept').DataTable({
+        //     processing: true,
+        //     serverSide: true,
+        //     url: "{{ url('dept') }}",
+        //     type: "GET",
+        //     columns: [
+        //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+        //         {data: 'kode_dept', name: 'kodeDept'},
+        //         {data: 'name', name: 'nameDept'},
+        //         {data: 'status', name: 'status'},
+        //         {data: 'action', name: 'action', orderable: false, searchable: false},
+        //     ]
+        // });
 
         $('.tambah-data').click(function () {
             $('#save-data').val("add-dept");
@@ -187,9 +228,7 @@
                 success: function (data) {
                     $('#DeptForm').trigger("reset");
                     $('#DeptModal').modal('hide');
-                    table.ajax.reload( function ( json ) {
-                        $('#dept').val( json.lastInput );
-                    } );
+                    datatable.ajax.reload();
                     // window.location.reload();
                     // var oTable = $('#dept').dataTable();
                     // oTable.ajax.reload();
@@ -200,8 +239,6 @@
                 }
             });
         });
-
-
     });
   </script>
 @endpush
