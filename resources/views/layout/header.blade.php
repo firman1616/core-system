@@ -35,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="
         https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
         " rel="stylesheet">
-        @stack('css')
+    @stack('css')
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse">

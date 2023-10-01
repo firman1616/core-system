@@ -1,10 +1,9 @@
 @extends('layout.content')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}  ">
-<link rel="stylesheet"
-    href="{{ asset('template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}  ">
-<link rel="stylesheet" href="{{ asset('template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}  ">
 @endpush
 
 @section('content')
@@ -43,8 +42,9 @@
                                 {{-- onclick="add()" --}}
                             </div>
                             <div class="card-body">
-                                <button class="btn btn-primary tambah-data"><i class="fas fa-plus"></i> | Tambah Data</button>
-                                <table id="dept" class="table table-bordered table-striped">
+                                <button class="btn btn-primary tambah-data"><i class="fas fa-plus"></i> | Tambah
+                                    Data</button>
+                                <table id="deptTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -55,23 +55,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($dept as $row)    
-                                        <tr>
-                                            <td>1</td>
-                                            <td>{{ $row->kode_dept }}</td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>
-                                                @if ($row->status == '1')
-                                                    {{ 'Active' }}
-                                                @else
-                                                    {{ 'NonActive' }}
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                            </td>
-                                        </tr>
+                                        @foreach ($dept as $row)
+                                            <tr>
+                                                <td>1</td>
+                                                <td>{{ $row->kode_dept }}</td>
+                                                <td>{{ $row->name }}</td>
+                                                <td>
+                                                    @if ($row->status == '1')
+                                                        {{ 'Active' }}
+                                                    @else
+                                                        {{ 'NonActive' }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning"><i
+                                                            class="fas fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-danger"><i
+                                                            class="fas fa-trash"></i></button>
+                                                </td>
+                                            </tr>
                                         @endforeach
 
                                     </tbody>
@@ -95,39 +97,41 @@
 
     <div class="modal fade" id="DeptModal">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <form id="DeptForm" name="DeptForm" method="POST" enctype="multipart/form-data">
-            <div class="modal-header">
-              <h4 class="modal-title"><label for="title" id="DeptTitle"></label></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                    <input type="hidden" name="id" id="id">
-                    <div class="form-group">
-                        <label for="name">Kode Dept</label>
-                        <input type="text" class="form-control" id="kodeDept" name="kodeDept" placeholder="Kode" required>
+            <div class="modal-content">
+                <form id="DeptForm" name="DeptForm" method="POST" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><label for="title" id="DeptTitle"></label></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="name">Name Dept</label>
-                        <input type="text" class="form-control" id="namaDept" name="namaDept" placeholder="Name" required>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="id">
+                        <div class="form-group">
+                            <label for="name">Kode Dept</label>
+                            <input type="text" class="form-control" id="kodeDept" name="kodeDept" placeholder="Kode"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name Dept</label>
+                            <input type="text" class="form-control" id="namaDept" name="namaDept" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">NonActive</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select name="status" id="status" class="form-control">
-                            <option value="1">Active</option>
-                            <option value="0">NonActive</option>
-                        </select>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="save-data">Save changes</button>
                     </div>
+                </form>
             </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" id="save-data">Save changes</button>
-            </div>
-        </form>
-          </div>
-          <!-- /.modal-content -->
+            <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
     </div>
@@ -135,13 +139,13 @@
 
 
 @push('js')
-<script src="{{ asset('template/plugins/datatables/jquery.dataTables.min.js') }}  "></script>
-<script src="{{ asset('template/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}  "></script>
-<script src="{{ asset('template/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}  "></script>
-<script src="{{ asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}  "></script>
-<script src="{{ asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}  "></script>
-<script src="{{ asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}  "></script>
-{{-- <script>
+    <script src="{{ asset('template/plugins/datatables/jquery.dataTables.min.js') }}  "></script>
+    <script src="{{ asset('template/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}  "></script>
+    <script src="{{ asset('template/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}  "></script>
+    <script src="{{ asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}  "></script>
+    <script src="{{ asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}  "></script>
+    <script src="{{ asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}  "></script>
+    {{-- <script>
     $(function () {
       $("#dept").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false
@@ -159,86 +163,129 @@
     });
   </script> --}}
 
-  <script>
+    <script>
+        $(document).ready(function() {
+            // var datatable = $('#dept').DataTable();
+            // $('#dept').DataTable({
+            //     processing: true,
+            //     serverside: true,
+            //     ajax: "{{ url('dept') }}",
+            //     columns: [{
+            //             data: 'DT_RowIndex',
+            //             name: 'DT_RowIndex',
+            //             orderable: false,
+            //             searchable: false
+            //         },
+            //         {
+            //             data: 'kode_dept',
+            //             name: 'Kode Dept'
+            //         }, {
+            //             data: 'name',
+            //             name: 'Nama Dept'
+            //         }, {
+            //             data: 'status',
+            //             name: 'Status'
+            //         }
+            //     ]
+            // })
 
-    $(document).ready(function () {
-        var datatable = $('#dept').DataTable();
-        // $('#dept').DataTable({
-        //     processing: true,
-        //     serverside: true,
-        //     ajax: "{{ url('dept') }}",
-        //     columns: [{
-        //             data: 'DT_RowIndex',
-        //             name: 'DT_RowIndex',
-        //             orderable: false,
-        //             searchable: false
-        //         },
-        //         {
-        //             data: 'kode_dept',
-        //             name: 'Kode Dept'
-        //         }, {
-        //             data: 'name',
-        //             name: 'Nama Dept'
-        //         }, {
-        //             data: 'status',
-        //             name: 'Status'
-        //         }
-        //     ]
-        // })
 
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        // var table = $('#dept').DataTable({
-        //     processing: true,
-        //     serverSide: true,
-        //     url: "{{ url('dept') }}",
-        //     type: "GET",
-        //     columns: [
-        //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-        //         {data: 'kode_dept', name: 'kodeDept'},
-        //         {data: 'name', name: 'nameDept'},
-        //         {data: 'status', name: 'status'},
-        //         {data: 'action', name: 'action', orderable: false, searchable: false},
-        //     ]
-        // });
-
-        $('.tambah-data').click(function () {
-            $('#save-data').val("add-dept");
-            $('#id').val('');
-            $('#DeptForm').trigger("reset");
-            $('#DeptTitle').html("Tambah Data Dept");
-            $('#DeptModal').modal('show');
-        })
-
-        $('#save-data').click(function (e) {
-            e.preventDefault();
-            $(this).html('Sending ...');
-            var table = $('#dept').DataTable();
-
-            $.ajax({
-                data: $('#DeptForm').serialize(),
-                url: "{{ url('dept') }}",
-                type: "POST",
-                datatype: 'json',
-                success: function (data) {
-                    $('#DeptForm').trigger("reset");
-                    $('#DeptModal').modal('hide');
-                    datatable.ajax.reload();
-                    // window.location.reload();
-                    // var oTable = $('#dept').dataTable();
-                    // oTable.ajax.reload();
-                },
-                error: function (data) {
-                    console.log('Error:',data);
-                    $('$save-data').html('Save changes');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            $('#deptTable').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "processing": true,
+                // serverSide: true,
+                // url: "{{ url('dept') }}",
+                // type: "GET",
+                // columns: [{
+                //         data: 'DT_RowIndex',
+                //         name: 'No'
+                //     },
+                //     {
+                //         data: 'kode_dept',
+                //         name: 'kodeDept'
+                //     },
+                //     {
+                //         data: 'name',
+                //         name: 'nameDept'
+                //     },
+                //     {
+                //         data: 'status',
+                //         name: 'Status'
+                //     },
+                //     {
+                //         data: 'action',
+                //         name: 'action',
+                //     },
+                // ]
+            });
+
+            // $('#deptTable').DataTable({
+            //     processing: true,
+            //     serverSide: true,
+            //     url: "{{ url('dept') }}",
+            //     type: "GET",
+            //     columns: [{
+            //         data: 'DT_RowIndex',
+            //         name: 'DT_RowIndex',
+            //         orderable: false,
+            //         searchable: false
+            //     }, {
+            //         data: 'kode_dept',
+            //         name: 'Kode Dept'
+            //     }, {
+            //         data: 'name',
+            //         name: 'Nama Dept'
+            //     }, {
+            //         data: 'action',
+            //         name: 'Aksi'
+            //     }]
+            // });
+
+            $('.tambah-data').click(function() {
+                $('#save-data').val("add-dept");
+                $('#id').val('');
+                $('#DeptForm').trigger("reset");
+                $('#DeptTitle').html("Tambah Data Dept");
+                $('#DeptModal').modal('show');
+            })
+
+            $('#save-data').click(function(e) {
+                e.preventDefault();
+                $(this).html('Sending ...');
+                var table = $('#deptTable').DataTable();
+
+                $.ajax({
+                    data: $('#DeptForm').serialize(),
+                    url: "{{ url('deptStore') }}",
+                    type: "POST",
+                    datatype: 'json',
+                    success: function(data) {
+                        $('#DeptForm').trigger("reset");
+                        $('#DeptModal').modal('hide');
+                        // table.DataTable().ajax.reload();
+                        // table.ajax.reload(function(json) {
+                        //     $('#DeptForm').val(json.lastInput);
+                        // });
+                        window.location.reload();
+                        // var oTable = $('#dept').dataTable();
+                        // oTable.ajax.reload();
+                    },
+                    error: function(data) {
+                        console.log('Error:', data);
+                        $('$save-data').html('Save changes');
+                    }
+                });
+            });
         });
-    });
-  </script>
+    </script>
 @endpush
