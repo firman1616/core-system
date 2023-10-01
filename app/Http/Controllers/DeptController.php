@@ -28,7 +28,16 @@ class DeptController extends Controller
         //         ->addIndexColumn()
         //         ->make(true);
         // }
-        return view('master.dept', $data);
+        return view('master.departement.index', $data);
+    }
+
+    public function tableDepartement()
+    {
+        $returnHTML = view('master.departement.table', [
+            'dept' => Dept::all()
+        ])->render();
+
+        return response()->json(['status' => 'success', 'html' => $returnHTML]);
     }
 
     /**
