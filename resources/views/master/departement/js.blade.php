@@ -84,7 +84,8 @@
             success: function(data) {
                 $('#div-table-departement').html(data.html);
                 $('#deptTable').DataTable({
-                    "processing": true
+                    "processing": true,
+                    "responsive": true,
                 });
             }
         });
