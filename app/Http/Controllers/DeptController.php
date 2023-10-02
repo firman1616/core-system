@@ -14,26 +14,30 @@ class DeptController extends Controller
      */
     public function index(Request $request)
     {
-        // if ($request->ajax()) {
-        //     $deptS = Dept::latest()->get();
-        //     return DataTables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action',function ($row) {
-        //             $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
-   
-        //             $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->name(true);
-        // }
-
         $data = [
             'title' => 'Master Department',
             'sub_title' => 'Department List',
             'dept' => Dept::all()
         ];
-        return view('master.dept',$data);
+        // dd(Dept::all());
+
+        // if (request()->ajax()) {
+        //     return DataTables()->of(Dept::select(['kode_dept', 'name', 'status'])->get())
+        //         ->addColumn('action', 'conten.action')
+        //         ->rawColumns(['action'])
+        //         ->addIndexColumn()
+        //         ->make(true);
+        // }
+        return view('master.departement.index', $data);
+    }
+
+    public function tableDepartement()
+    {
+        $returnHTML = view('master.departement.table', [
+            'dept' => Dept::all()
+        ])->render();
+
+        return response()->json(['status' => 'success', 'html' => $returnHTML]);
     }
 
     /**

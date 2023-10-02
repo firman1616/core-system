@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
@@ -35,7 +31,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="
         https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
         " rel="stylesheet">
-        @stack('css')
+    <link rel="stylesheet" href="{{ asset('template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/toastr/toastr.min.css') }}">
+    @stack('css')
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
