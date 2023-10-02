@@ -33,7 +33,8 @@
                     $('#DeptForm').trigger("reset");
                     Swal.fire({
                         icon: 'success',
-                        title: 'Data Berhasil Ditambahkan',
+                        title: 'Success',
+                        text: 'Data Berhasil ditambahkan',
                         showConfirmButton: false,
                         timer: 3000
                     })
@@ -48,16 +49,32 @@
 
         // delete function
         $('body').on('click', '.delete', function(e) {
-            if (confirm('Yakin ingin menghapus data ini ?') == true) {
-                var id = $(this).data('id');
-                $.ajax({
-                    url: "{{ url('deptDestroy') }}/" + id,
-                    // data: { id: id },
-                    type: 'DELETE'
-                });
-                tableDepartement();
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('deptDestroy') }}/" + id,
+                        // data: { id: id },
+                        type: 'DELETE'
+                    });                   
+                    Swal.fire(
+                        'Deleted!',
+                        'Data berhasil dihapus.',
+                        'success'
+                    )
+                    tableDepartement();
+                }
+            })
         });
+
+
     });
 
     function tableDepartement() {
@@ -66,7 +83,9 @@
             type: "GET",
             success: function(data) {
                 $('#div-table-departement').html(data.html);
-                $('#deptTable').DataTable({});
+                $('#deptTable').DataTable({
+                    "processing": true
+                });
             }
         });
     }
