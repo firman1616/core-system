@@ -59,6 +59,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    var id = $(this).data('id');
                     $.ajax({
                         url: "{{ url('deptDestroy') }}/" + id,
                         // data: { id: id },
@@ -73,6 +74,9 @@
                 }
             })
         });
+
+        // edit function
+        
 
 
     });
