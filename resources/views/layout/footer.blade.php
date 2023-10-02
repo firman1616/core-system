@@ -19,7 +19,9 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('template/dist/js/adminlte.min.js') }} "></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('template/dist/js/demo.js') }} "></script>
+{{-- <script src="{{ asset('template/dist/js/demo.js') }} "></script> --}}
+<script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
 @stack('js')
 </body>
 

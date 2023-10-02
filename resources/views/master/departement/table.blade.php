@@ -9,9 +9,10 @@
         </tr>
     </thead>
     <tbody>
+        <?php $x=1; ?>
         @foreach ($dept as $row)
             <tr>
-                <td>1</td>
+                <td>{{$x++}} </td>
                 <td>{{ $row->kode_dept }}</td>
                 <td>{{ $row->name }}</td>
                 <td>

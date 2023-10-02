@@ -31,6 +31,9 @@
     <link href="
         https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
         " rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/toastr/toastr.min.css') }}">
     @stack('css')
 </head>
 
