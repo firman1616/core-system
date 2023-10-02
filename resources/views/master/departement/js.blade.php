@@ -8,6 +8,13 @@
 
         tableDepartement();
 
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
         $('.tambah-data').click(function() {
             $('#save-data').val("add-dept");
             $('#id').val('');
@@ -18,7 +25,14 @@
 
         $('#save-data').click(function(e) {
             e.preventDefault();
-            $(this).html('Sending ...');
+            // $(this).html('Sending ...');
+            $('#DeptModal').modal('hide');
+            Swal.fire({
+                icon: 'info',
+                title: 'Data Sedang diproses',
+                showConfirmButton: false,
+                // timer: 3000
+            })
             var table = $('#deptTable').DataTable();
 
             $.ajax({
@@ -28,14 +42,13 @@
                 datatype: 'json',
                 success: function(data) {
                     $('#DeptForm').trigger("reset");
-                    $('#DeptModal').modal('hide');
                     tableDepartement();
-                    // table.DataTable().ajax.reload();
-                    // table.ajax.reload(function(json) {
-                    //     $('#DeptForm').val(json.lastInput);
-                    // });
-                    // var oTable = $('#dept').dataTable();
-                    // oTable.ajax.reload();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Berhasil Ditambahkan',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
                 },
                 error: function(data) {
                     console.log('Error:', data);

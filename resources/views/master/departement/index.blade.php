@@ -33,9 +33,6 @@
                             <div class="card-body">
                                 <button class="btn btn-primary tambah-data"><i class="fas fa-plus"></i> | Tambah
                                     Data</button>
-                                    <button type="button" class="btn btn-success swalDefaultSuccess">
-                                        Launch Success Toast
-                                      </button>
                                 <div id="div-table-departement"></div>
                             </div>
                             <!-- /.card-body -->
@@ -104,23 +101,6 @@
     <script src="{{ asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}  "></script>
     <script src="{{ asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}  "></script>
     <script src="{{ asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}  "></script>
-    <script>
-    $(function() {
-        var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-        });
-
-        $('.swalDefaultSuccess').click(function() {
-            Toast.fire({
-                icon: 'success',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-  });
-    </script>
 
     @include('master.departement.js')
 @endpush
