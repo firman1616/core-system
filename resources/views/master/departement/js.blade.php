@@ -8,32 +8,21 @@
 
         tableDepartement();
 
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
-
-        $('.tambah-data').click(function() {
-            $('#save-data').val("add-dept");
-            $('#id').val('');
-            $('#DeptForm').trigger("reset");
-            $('#DeptTitle').html("Tambah Data Dept");
-            $('#DeptModal').modal('show');
-        })
+        $('#DeptTitle').html("Tambah Data Dept");
+        $('#save-data').val("add-dept");
+        $('#id').val('');
+        $('#DeptForm').trigger("reset");
 
         $('#save-data').click(function(e) {
             e.preventDefault();
             // $(this).html('Sending ...');
-            $('#DeptModal').modal('hide');
+            // $('#DeptModal').modal('hide');
             Swal.fire({
                 icon: 'info',
                 title: 'Data Sedang diproses',
                 showConfirmButton: false,
                 // timer: 3000
             })
-            var table = $('#deptTable').DataTable();
 
             $.ajax({
                 data: $('#DeptForm').serialize(),
@@ -42,19 +31,32 @@
                 datatype: 'json',
                 success: function(data) {
                     $('#DeptForm').trigger("reset");
-                    tableDepartement();
                     Swal.fire({
                         icon: 'success',
                         title: 'Data Berhasil Ditambahkan',
                         showConfirmButton: false,
                         timer: 3000
                     })
+                    tableDepartement();
                 },
                 error: function(data) {
                     console.log('Error:', data);
                     $('$save-data').html('Save changes');
                 }
             });
+        });
+
+        // delete function
+        $('body').on('click', '.delete', function(e) {
+            if (confirm('Yakin ingin menghapus data ini ?') == true) {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "{{ url('deptDestroy') }}/" + id,
+                    // data: { id: id },
+                    type: 'DELETE'
+                });
+                tableDepartement();
+            }
         });
     });
 

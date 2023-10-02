@@ -30,6 +30,7 @@ Route::get('level', [LevelController::class, 'index']);
 // Route::post('AddData', [DeptController::class,'AddData']);
 Route::get('dept', [DeptController::class, 'index']);
 Route::post('deptStore', [DeptController::class, 'store']);
+Route::delete('deptDestroy/{id}', [DeptController::class, 'destroy']);
 Route::get('tableDepartement', [DeptController::class, 'tableDepartement']);
 // Route::resource('master/dept', DeptController::class);
 // Route::post('store', DeptController::class, 'store')->name("dept.store");

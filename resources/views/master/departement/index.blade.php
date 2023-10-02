@@ -24,20 +24,50 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">{{ $sub_title }}</h3>
                             </div>
                             <div class="card-body">
-                                <button class="btn btn-primary tambah-data"><i class="fas fa-plus"></i> | Tambah
-                                    Data</button>
+                                {{-- <button class="btn btn-primary tambah-data"><i class="fas fa-plus"></i> | Tambah
+                                    Data</button> --}}
                                 <div id="div-table-departement"></div>
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer">
-                                Footer
+                        </div>
+                        <!-- /.card -->
+                    </div>
+
+                    <div class="col-6">
+                        <!-- Default box -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><label for="title" id="DeptTitle"></label></h3>
+                            </div>
+                             <div class="card-body">
+                                <form id="DeptForm" name="DeptForm" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" id="id">
+                                    <div class="form-group">
+                                        <label for="name">Kode Dept</label>
+                                        <input type="text" class="form-control" id="kodeDept" name="kodeDept" placeholder="Kode"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Name Dept</label>
+                                        <input type="text" class="form-control" id="namaDept" name="namaDept" placeholder="Name"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="1">Active</option>
+                                            <option value="0">NonActive</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="save-data">Save changes</button>
+                                </form>
                             </div>
                             <!-- /.card-footer-->
                         </div>
@@ -51,7 +81,7 @@
     <!-- /.content-wrapper -->
 
 
-    <div class="modal fade" id="DeptModal">
+    {{-- <div class="modal fade" id="DeptModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="DeptForm" name="DeptForm" method="POST" enctype="multipart/form-data">
@@ -87,10 +117,10 @@
                     </div>
                 </form>
             </div>
-            <!-- /.modal-content -->
+            
         </div>
-        <!-- /.modal-dialog -->
-    </div>
+        
+    </div> --}}
 @endsection
 
 
