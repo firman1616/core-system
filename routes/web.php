@@ -32,4 +32,5 @@ Route::get('level', [LevelController::class, 'index']);
 Route::get('dept', [DeptController::class, 'index']);
 Route::post('deptStore', [DeptController::class, 'store']);
 Route::delete('deptDestroy/{id}', [DeptController::class, 'destroy']);
+Route::get('deptEdit/{id}', [DeptController::class, 'vedit']);
 Route::get('tableDepartement', [DeptController::class, 'tableDepartement']);

@@ -72,9 +72,10 @@ class DeptController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function vedit($id)
     {
-        //
+        $data = Dept::where('id', $id)->first();
+        return response()->json(['result' => $data]);
     }
 
     /**

@@ -76,7 +76,22 @@
         });
 
         // edit function
-        
+        $('body').on('click','.edit',function (e) {
+            var id = $(this).data('id');
+            var kode = $(this).data('#kodeDept');
+            $.ajax({
+                url: "{{ url('deptEdit') }}/" + id,
+                type: 'GET',
+                success: function (res) {
+                    $('#id').val(res.result.id);
+                    $('#kodeDept').val(res.result.kode_dept);
+                    $('#namaDept').val(res.result.name);
+                    $('#status').val(res.result.status);
+                    $('#DeptModalEdit').modal('show');
+                    console.log(res.result.kode_dept);
+                }
+            })
+        })
 
 
     });

@@ -81,10 +81,10 @@
     <!-- /.content-wrapper -->
 
 
-    {{-- <div class="modal fade" id="DeptModal">
+    {{-- <div class="modal fade" id="DeptModalEdit">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="DeptForm" name="DeptForm" method="POST" enctype="multipart/form-data">
+                <form id="DeptFormEdit" name="DeptFormEdit" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h4 class="modal-title"><label for="title" id="DeptTitle"></label></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
