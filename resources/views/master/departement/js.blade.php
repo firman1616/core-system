@@ -8,18 +8,22 @@
 
         tableDepartement();
 
-        $('.tambah-data').click(function() {
-            $('#save-data').val("add-dept");
-            $('#id').val('');
-            $('#DeptForm').trigger("reset");
-            $('#DeptTitle').html("Tambah Data Dept");
-            $('#DeptModal').modal('show');
-        })
+        $('#DeptTitle').html("Tambah Data Dept");
+        $('#save-data').val("add-dept");
+        $('#id').val('');
+        $('#DeptForm').trigger("reset");
 
+        // Tambah data
         $('#save-data').click(function(e) {
             e.preventDefault();
-            $(this).html('Sending ...');
-            var table = $('#deptTable').DataTable();
+            // $(this).html('Sending ...');
+            // $('#DeptModal').modal('hide');
+            Swal.fire({
+                icon: 'info',
+                title: 'Data Sedang diproses',
+                showConfirmButton: false,
+                // timer: 3000
+            })
 
             $.ajax({
                 data: $('#DeptForm').serialize(),
@@ -28,14 +32,14 @@
                 datatype: 'json',
                 success: function(data) {
                     $('#DeptForm').trigger("reset");
-                    $('#DeptModal').modal('hide');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Data Berhasil ditambahkan',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
                     tableDepartement();
-                    // table.DataTable().ajax.reload();
-                    // table.ajax.reload(function(json) {
-                    //     $('#DeptForm').val(json.lastInput);
-                    // });
-                    // var oTable = $('#dept').dataTable();
-                    // oTable.ajax.reload();
                 },
                 error: function(data) {
                     console.log('Error:', data);
@@ -43,6 +47,70 @@
                 }
             });
         });
+
+        // delete function
+        $('body').on('click', '.delete', function(e) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        url: "{{ url('deptDestroy') }}/" + id,
+                        // data: { id: id },
+                        type: 'DELETE'
+                    });                   
+                    Swal.fire(
+                        'Deleted!',
+                        'Data berhasil dihapus.',
+                        'success'
+                    )
+                    tableDepartement();
+                }
+            })
+        });
+
+        // edit function
+        $('body').on('click','.edit',function (e) {
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{{ url('deptEdit') }}/" + id,
+                type: 'GET',
+                success: function (res) {
+                    $('#id').val(res.result.id);
+                    $('#kodeDept').val(res.result.kode_dept);
+                    $('#namaDept').val(res.result.name);
+                    $('#status').val(res.result.status);
+                    console.log(res.result.kode_dept);
+                }
+            })
+        })
+
+        // fungsi update data
+        $('#DeptForm').submit(function (e) { 
+            e.preventDefault();
+            var id = $(this).data('id');
+            
+            $.ajax({
+                type: "PUT",
+                url: "{{ url('deptUpdate') }}/" + id,
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    tableDepartement();
+                }
+            });
+            
+        });
+
+
     });
 
     function tableDepartement() {
@@ -51,7 +119,10 @@
             type: "GET",
             success: function(data) {
                 $('#div-table-departement').html(data.html);
-                $('#deptTable').DataTable({});
+                $('#deptTable').DataTable({
+                    "processing": true,
+                    "responsive": true,
+                });
             }
         });
     }

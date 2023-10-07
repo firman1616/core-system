@@ -72,24 +72,38 @@ class DeptController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function vedit($id)
     {
-        //
+        $data = Dept::where('id', $id)->first();
+        return response()->json(['result' => $data]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // $data = [
+        //     'kode_dept' => $request->kodeDept,
+        //     'name' => $request->namaDept,
+        //     'status' => $request->status,
+        // ];
+        // Dept::where('id',$id)->update($data);
+        $dept = Dept::findOrFail($id);
+
+        $dept->update([
+            'kode_dept' => $request->kodeDept,
+            'name' => $request->namaDept,
+            'status' => $request->status,
+        ]);
+        return response()->json(['success' => 'Data Berhasil diubah']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        Dept::where('id', $id)->delete();
     }
 }
