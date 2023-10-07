@@ -81,9 +81,22 @@ class DeptController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // $data = [
+        //     'kode_dept' => $request->kodeDept,
+        //     'name' => $request->namaDept,
+        //     'status' => $request->status,
+        // ];
+        // Dept::where('id',$id)->update($data);
+        $dept = Dept::findOrFail($id);
+
+        $dept->update([
+            'kode_dept' => $request->kodeDept,
+            'name' => $request->namaDept,
+            'status' => $request->status,
+        ]);
+        return response()->json(['success' => 'Data Berhasil diubah']);
     }
 
     /**

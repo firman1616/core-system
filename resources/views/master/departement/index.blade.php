@@ -48,12 +48,13 @@
                             </div>
                              <div class="card-body">
                                 <form id="DeptForm" name="DeptForm" method="POST" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" id="id">
+                                    <input type="text" name="id" id="id">
                                     <div class="form-group">
                                         <label for="name">Kode Dept</label>
                                         <input type="text" class="form-control" id="kodeDept" name="kodeDept" placeholder="Kode"
                                             required>
                                     </div>
+                                    
                                     <div class="form-group">
                                         <label for="name">Name Dept</label>
                                         <input type="text" class="form-control" id="namaDept" name="namaDept" placeholder="Name"
