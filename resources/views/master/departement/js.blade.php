@@ -13,7 +13,7 @@
         $('#id').val('');
         $('#DeptForm').trigger("reset");
 
-        // Tambah data
+        // Tambah dan ubah data
         $('#save-data').click(function(e) {
             e.preventDefault();
             // $(this).html('Sending ...');
@@ -27,7 +27,7 @@
 
             $.ajax({
                 data: $('#DeptForm').serialize(),
-                url: "{{ url('deptStore') }}",
+                url: "{{ url('deptStoreOrUpdate') }}",
                 type: "POST",
                 datatype: 'json',
                 success: function(data) {
@@ -87,29 +87,9 @@
                     $('#kodeDept').val(res.result.kode_dept);
                     $('#namaDept').val(res.result.name);
                     $('#status').val(res.result.status);
-                    console.log(res.result.kode_dept);
                 }
             })
         })
-
-        // fungsi update data
-        $('#DeptForm').submit(function (e) { 
-            e.preventDefault();
-            var id = $(this).data('id');
-            
-            $.ajax({
-                type: "PUT",
-                url: "{{ url('deptUpdate') }}/" + id,
-                data: $(this).serialize(),
-                dataType: "json",
-                success: function (response) {
-                    console.log(response);
-                    tableDepartement();
-                }
-            });
-            
-        });
-
 
     });
 
