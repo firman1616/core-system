@@ -49,16 +49,27 @@ class DeptController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource and update data in storage.
      */
-    public function store(Request $request)
+    public function storeAndUpdate(Request $request)
     {
-        Dept::create([
-            'kode_dept' => $request->kodeDept,
-            'name' => $request->namaDept,
-            'status' => $request->status
-        ]);
-        return response()->json(['success' => 'Data Berhasil ditambahkan']);
+        if($request->id){ // if ID exists then update the data
+            $dept = Dept::findOrFail($request->id);
+
+            $dept->update([
+                'kode_dept' => $request->kodeDept,
+                'name' => $request->namaDept,
+                'status' => $request->status,
+            ]);
+            return response()->json(['success' => 'Data Berhasil diubah']);
+        }else{ // if the ID doesn't exist then create new data
+            Dept::create([
+                'kode_dept' => $request->kodeDept,
+                'name' => $request->namaDept,
+                'status' => $request->status
+            ]);
+            return response()->json(['success' => 'Data Berhasil ditambahkan']);
+        }
     }
 
     /**
@@ -76,27 +87,6 @@ class DeptController extends Controller
     {
         $data = Dept::where('id', $id)->first();
         return response()->json(['result' => $data]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        // $data = [
-        //     'kode_dept' => $request->kodeDept,
-        //     'name' => $request->namaDept,
-        //     'status' => $request->status,
-        // ];
-        // Dept::where('id',$id)->update($data);
-        $dept = Dept::findOrFail($id);
-
-        $dept->update([
-            'kode_dept' => $request->kodeDept,
-            'name' => $request->namaDept,
-            'status' => $request->status,
-        ]);
-        return response()->json(['success' => 'Data Berhasil diubah']);
     }
 
     /**
