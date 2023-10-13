@@ -38,3 +38,4 @@ Route::get('tableDepartement', [DeptController::class, 'tableDepartement']);
 
 // role
 Route::get('role',[RoleController::class,'index']);
+Route::get('tableRole', [RoleController::class, 'tableRole']);

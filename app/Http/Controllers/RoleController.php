@@ -15,11 +15,19 @@ class RoleController extends Controller
         $data = [
             'title' => 'Roles',
             'subtitle' => 'Roles List',
-            'titleform' => 'Form data'
+            'titleform' => 'Form data',
+            'role' => Role::all()
         ];
         return view('master.role.index',$data);
     }
 
+    public function tableRole() {
+        $returnHTML = view('master.role.table',[
+            'role' => Role::all()
+        ])->render();
+
+        return response()->json(['status' => 'success', 'html' => $returnHTML]);
+    }
     /**
      * Show the form for creating a new resource.
      */
