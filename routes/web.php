@@ -4,6 +4,7 @@ use App\Http\Controllers\DasahboardController;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Database\Query\IndexHint;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,7 @@ Route::post('deptStoreOrUpdate', [DeptController::class, 'storeAndUpdate']);
 Route::delete('deptDestroy/{id}', [DeptController::class, 'destroy']);
 Route::get('deptEdit/{id}', [DeptController::class, 'vedit']);
 Route::get('tableDepartement', [DeptController::class, 'tableDepartement']);
+
+// role
+Route::get('role',[RoleController::class,'index']);
+Route::get('tableRole', [RoleController::class, 'tableRole']);
