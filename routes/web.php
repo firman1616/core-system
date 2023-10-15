@@ -37,5 +37,7 @@ Route::get('deptEdit/{id}', [DeptController::class, 'vedit']);
 Route::get('tableDepartement', [DeptController::class, 'tableDepartement']);
 
 // role
-Route::get('role',[RoleController::class,'index']);
+Route::get('role', [RoleController::class, 'index']);
+Route::post('roleStoreOrUpdate', [RoleController::class, 'storeAndUpdate']);
+Route::get('roleEdit/{id}', [RoleController::class, 'vedit']);
 Route::get('tableRole', [RoleController::class, 'tableRole']);
