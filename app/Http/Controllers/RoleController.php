@@ -18,11 +18,12 @@ class RoleController extends Controller
             'titleform' => 'Form data',
             'role' => Role::all()
         ];
-        return view('master.role.index',$data);
+        return view('master.role.index', $data);
     }
 
-    public function tableRole() {
-        $returnHTML = view('master.role.table',[
+    public function tableRole()
+    {
+        $returnHTML = view('master.role.table', [
             'role' => Role::all()
         ])->render();
 
@@ -39,9 +40,23 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storeAndUpdate(Request $request)
     {
-        //
+        if ($request->id) { // if ID exists then update the data
+            $role = Role::findOrFail($request->idRole);
+
+            $role->update([
+                'name' => $request->rolename,
+                'status' => $request->status,
+            ]);
+            return response()->json(['message' => 'Data Berhasil diubah']);
+        } else { // if the ID doesn't exist then create new data
+            Role::create([
+                'name' => $request->rolename,
+                'status' => $request->status,
+            ]);
+            return response()->json(['message' => 'Data Berhasil ditambahkan']);
+        }
     }
 
     /**
