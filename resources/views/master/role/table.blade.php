@@ -20,7 +20,9 @@
                         {{ 'NonActive' }}
                     @endif
                 </td>
-                <td><button type="button" class="btn btn-warning" id="editStatus"><i class="fa fa-edit"></i></button></td>
+                <td><button type="button" class="btn btn-warning edit" id="editData" data-id="{{ $row->id }}"><i
+                            class="fa fa-edit"></i></button>
+                </td>
             </tr>
         @endforeach
     </tbody>

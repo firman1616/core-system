@@ -44,7 +44,21 @@
                 }
             });
         });
-    })
+
+        $('body').on('click', '.edit', function(e) {
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{{ url('roleEdit') }}/" + id,
+                type: 'GET',
+                success: function(res) {
+                    $('#id').val(res.result.id);
+                    $('#rolename').val(res.result.name);
+                    $('#status').val(res.result.status);
+                }
+            })
+        })
+
+    });
 
 
 

@@ -43,7 +43,7 @@ class RoleController extends Controller
     public function storeAndUpdate(Request $request)
     {
         if ($request->id) { // if ID exists then update the data
-            $role = Role::findOrFail($request->idRole);
+            $role = Role::findOrFail($request->id);
 
             $role->update([
                 'name' => $request->rolename,
@@ -70,9 +70,10 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role)
+    public function vedit($id)
     {
-        //
+        $role = Role::where('id', $id)->first();
+        return response()->json(['result' => $role]);
     }
 
     /**

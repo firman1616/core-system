@@ -42,7 +42,7 @@
                         </div>
                         <div class="card-body">
                             <form id="Roleform" name="Roleform" method="POST" enctype="multipart/form-data">
-                                <input type="hidden" id="idRole" name="idRole">
+                                <input type="hidden" id="id" name="id">
                                 <div class="form-group">
                                     <label for="name">Role Name</label>
                                     <input type="text" class="form-control" id="rolename" name="rolename">
