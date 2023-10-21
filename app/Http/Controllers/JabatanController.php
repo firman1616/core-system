@@ -12,7 +12,13 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'Master Jabatan',
+            'subtitle' => 'List Jabatan',
+            'titleform' => 'Form Data',
+            'jabatan' => Jabatan::all()
+        ];
+        return view('master.jabatan.index', $data);
     }
 
     /**

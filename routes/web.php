@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DasahboardController;
 use App\Http\Controllers\DeptController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\RoleController;
@@ -41,3 +42,9 @@ Route::get('role', [RoleController::class, 'index']);
 Route::post('roleStoreOrUpdate', [RoleController::class, 'storeAndUpdate']);
 Route::get('roleEdit/{id}', [RoleController::class, 'vedit']);
 Route::get('tableRole', [RoleController::class, 'tableRole']);
+
+// jabatan
+Route::get('jabatan', [JabatanController::class, 'index']);
+Route::post('jabatanStoreOrUpdate', [JabatanController::class, 'storeAndUpdate']);
+Route::get('jabatanEdit/{id}', [JabatanController::class, 'vedit']);
+Route::get('tableJabatan', [JabatanController::class, 'tableEdite']);
