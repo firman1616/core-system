@@ -48,7 +48,7 @@
                                     <input type="text" class="form-control" id="levelname" name="levelname">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Role Status</label>
+                                    <label for="name">Level Status</label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="1">Active</option>
                                         <option value="0">NonActive</option>
