@@ -12,7 +12,47 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'Master Jabatan',
+            'subtitle' => 'List Jabatan',
+            'titleform' => 'Form Data',
+            'jabatan' => Jabatan::all()
+        ];
+        return view('master.jabatan.index', $data);
+    }
+
+    public function tableJabatan()
+    {
+        $returnHTML = view('master.jabatan.table', [
+            'jabatan' => Jabatan::all()
+        ])->render();
+
+        return response()->json(['status' => 'success', 'html' => $returnHTML]);
+    }
+
+    public function storeAndUpdate(Request $request)
+    {
+        if ($request->id) { // if ID exists then update the data
+            $jabatan = Jabatan::findOrFail($request->id);
+
+            $jabatan->update([
+                'name' => $request->levelname,
+                'status' => $request->status,
+            ]);
+            return response()->json(['message' => 'Data Berhasil diubah']);
+        } else { // if the ID doesn't exist then create new data
+            Jabatan::create([
+                'name' => $request->levelname,
+                'status' => $request->status,
+            ]);
+            return response()->json(['message' => 'Data Berhasil ditambahkan']);
+        }
+    }
+
+    public function vedit($id)
+    {
+        $jabatan = Jabatan::where('id', $id)->first();
+        return response()->json(['result' => $jabatan]);
     }
 
     /**
