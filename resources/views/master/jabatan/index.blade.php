@@ -41,11 +41,11 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form id="Roleform" name="Roleform" method="POST" enctype="multipart/form-data">
+                            <form id="Jabatanform" name="Jabatanform" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" id="id" name="id">
                                 <div class="form-group">
-                                    <label for="name">Role Name</label>
-                                    <input type="text" class="form-control" id="rolename" name="rolename">
+                                    <label for="name">Level Name</label>
+                                    <input type="text" class="form-control" id="levelname" name="levelname">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Role Status</label>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div id="role-table"></div>
+                            <div id="jabatan-table"></div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

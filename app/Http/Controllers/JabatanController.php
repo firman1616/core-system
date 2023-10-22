@@ -21,6 +21,15 @@ class JabatanController extends Controller
         return view('master.jabatan.index', $data);
     }
 
+    public function tableJabatan()
+    {
+        $returnHTML = view('master.jabatan.table', [
+            'jabatan' => Jabatan::all()
+        ])->render();
+
+        return response()->json(['status' => 'success', 'html' => $returnHTML]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

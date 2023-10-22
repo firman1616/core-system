@@ -47,4 +47,4 @@ Route::get('tableRole', [RoleController::class, 'tableRole']);
 Route::get('jabatan', [JabatanController::class, 'index']);
 Route::post('jabatanStoreOrUpdate', [JabatanController::class, 'storeAndUpdate']);
 Route::get('jabatanEdit/{id}', [JabatanController::class, 'vedit']);
-Route::get('tableJabatan', [JabatanController::class, 'tableEdite']);
+Route::get('tableJabatan', [JabatanController::class, 'tableJabatan']);
