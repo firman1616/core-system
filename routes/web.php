@@ -27,7 +27,6 @@ Route::get('/', function () {
 
 Route::get('dashboard', [DasahboardController::class, 'index']);
 Route::get('master', [MasterController::class, 'index']);
-Route::get('user', [UsersController::class, 'index']);
 Route::get('level', [LevelController::class, 'index']);
 
 // dept
@@ -48,3 +47,10 @@ Route::get('jabatan', [JabatanController::class, 'index']);
 Route::post('jabatanStoreOrUpdate', [JabatanController::class, 'storeAndUpdate']);
 Route::get('jabatanEdit/{id}', [JabatanController::class, 'vedit']);
 Route::get('tableJabatan', [JabatanController::class, 'tableJabatan']);
+
+// User
+Route::get('user', [UsersController::class, 'index']);
+Route::post('userStoreOrUpdate', [UsersController::class, 'storeAndUpdate']);
+Route::get('userEdit/{id}', [UsersController::class, 'vedit']);
+Route::delete('userDestroy/{id}', [UsersController::class, 'destroy']);
+Route::get('tableUser', [UsersController::class, 'tableUser']);
